@@ -150,7 +150,7 @@ const VideoTestimonials = ({ testimonials }: VideoTestimonialsProps) => {
                                         poster={testimonial.poster}
                                         className="w-full h-full object-cover"
                                         loop
-                                        muted={!isCenter} // Mute non-center videos just in case
+                                        muted // Mute all videos
                                         playsInline
                                     // Controls only on center? Or maybe custom UI.
                                     // doodle shows clean UI. Let's stick to clean.

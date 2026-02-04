@@ -128,7 +128,7 @@ const Preloader: React.FC<PreloaderProps> = ({
         });
 
         // 4. Text Reveal
-        gsap.to([".header span", ".coordinates span"], {
+        gsap.to(".header span", {
             y: "0%",
             duration: 1,
             stagger: 0.125,
@@ -197,17 +197,6 @@ const Preloader: React.FC<PreloaderProps> = ({
                             <span>Enroll to become a Magnate</span>
                         </a>
                     </div>
-                </div>
-
-                <div className={`${styles.coordinates} coordinates`}>
-                    {/* Keeping coordinates or removing if they clash? 
-                         User didn't ask to remove, but they might be distracting. 
-                         I will keep them as part of the "Magnate" aesthetic unless told otherwise, 
-                         or maybe update to something relevant like "Since 2025" etc.
-                         For now, I'll leave them to maintain the visual balance.
-                     */}
-                    <p className={styles.text}><span>37.6934° N</span></p>
-                    <p className={styles.text}><span>97.3382° W</span></p>
                 </div>
             </div>
 
