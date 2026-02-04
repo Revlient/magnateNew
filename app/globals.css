@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+
+:root {
+  /* New Color Palette */
+  --primary-1: #5e0c5e;
+  --primary-2: #100624;
+  --secondary-white: #ffffff;
+  --secondary-cyan: #20ecff;
+  --secondary-magenta: #fb01ff;
+
+  --background: var(--primary-2);
+  /* --background: #e4e7df; */
+  --background-200: var(--primary-1);
+  /* --background-200: #666666; */
+  --foreground: var(--secondary-white);
+  --foreground-200: #cccccc;
+  --secondary: var(--primary-1);
+
+  --btn-icon: var(--secondary-magenta);
+
+  /* Course Hero Variables */
+  --bg-dark: var(--primary-1);
+  /* Matches Preloader hero bg */
+  --bg-card: var(--primary-1);
+  --text-primary: var(--secondary-white);
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --accent-primary: var(--secondary-cyan);
+  /* Yellow accent */
+  --border-light: var(--primary-1);
+  --border-color: #3b073b;
+  /* Darker shade of primary-1 for borders */
+}
+
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-heading: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  cursor: url("/cursor.png"), auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+button, input, textarea, label, .ui-label {
+  font-family: var(--font-sans);
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "nm";
+  src: url("/fonts/nm/nm-medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "humane";
+  src: url("/fonts/Variable-TT/Humane-VF.ttf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap
+}
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.char {
+  transition: color 150ms ease-out;
+}

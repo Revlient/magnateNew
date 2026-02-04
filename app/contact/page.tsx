@@ -1,0 +1,234 @@
+"use client";
+import "./contact.css";
+import React, { useRef, useState } from "react";
+
+import Copy from "../../components/Copy/Copy";
+
+import { useTransitionRouter } from "next-view-transitions";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+const ContactPage = () => {
+    const router = useTransitionRouter();
+    const contactRef = useRef<HTMLDivElement>(null);
+    const [formData, setFormData] = useState({
+        fullName: "",
+        phone: "",
+        course: "Course 1"
+    });
+
+    useGSAP(
+        () => {
+            if (!contactRef.current) return;
+            // Animate Map Wrapper instead of .contact-img
+            const mapWrapper = contactRef.current.querySelector(".contact-map-wrapper");
+            const footerTexts = contactRef.current.querySelectorAll(
+                ".contact-footer .footer-text"
+            );
+
+            gsap.set(mapWrapper, {
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+            });
+
+            gsap.to(mapWrapper, {
+                clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                duration: 1,
+                delay: 0.85,
+                ease: "power3.out",
+            });
+
+            footerTexts.forEach((element) => {
+                const textContent = element.querySelector(".footer-text-content");
+                gsap.set(textContent, {
+                    y: "100%",
+                });
+            });
+
+            footerTexts.forEach((element, index) => {
+                const textContent = element.querySelector(".footer-text-content");
+                gsap.to(textContent, {
+                    y: "0%",
+                    duration: 0.8,
+                    delay: 1.8 + index * 0.1,
+                    ease: "power3.out",
+                });
+            });
+        },
+        { scope: contactRef }
+    );
+
+    function slideInOut() {
+        document.documentElement.animate(
+            [
+                {
+                    opacity: 1,
+                    transform: "translateY(0) scale(1)",
+                },
+                {
+                    opacity: 0.2,
+                    transform: "translateY(-30%) scale(0.90)",
+                },
+            ],
+            {
+                duration: 1500,
+                easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+                fill: "forwards",
+                pseudoElement: "::view-transition-old(root)",
+            }
+        );
+
+        document.documentElement.animate(
+            [
+                {
+                    clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+                },
+                {
+                    clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+                },
+            ],
+            {
+                duration: 1500,
+                easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+                fill: "forwards",
+                pseudoElement: "::view-transition-new(root)",
+            }
+        );
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Temporary logic: Construct mailto link
+        const subject = `Course Inquiry from ${formData.fullName}`;
+        const body = `Name: ${formData.fullName}%0D%0APhone: ${formData.phone}%0D%0ACourse: ${formData.course}`;
+        window.location.href = `mailto:info@magnatestudyabroad.com?subject=${subject}&body=${body}`;
+    };
+
+    const handleWhatsApp = () => {
+        window.open("https://wa.me/919207995577", "_blank");
+    };
+
+    return (
+        <div className="contact" ref={contactRef}>
+            <div className="contact-map-wrapper">
+                <iframe
+                    src="https://maps.google.com/maps?q=Magnate%20Study%20Abroad%2C%20Jairaj%20Building%2C%20Kochi&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, filter: "grayscale(100%) invert(90%)" }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+            </div>
+
+            <div className="contact-form-container">
+                <div className="contact-header">
+                    <Copy delay={1}>
+                        <h1 className="header-title">Start Your Journey</h1>
+                    </Copy>
+                </div>
+
+                <form className="contact-form" onSubmit={handleSubmit}>
+                    <Copy delay={1.1}>
+                        <div className="form-group">
+                            <label>Full Name</label>
+                            <input
+                                type="text"
+                                name="fullName"
+                                placeholder="John Doe"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </Copy>
+
+                    <Copy delay={1.2}>
+                        <div className="form-group">
+                            <label>Phone (Country Code)</label>
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="+1 234 567 8900"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                    </Copy>
+
+                    <Copy delay={1.3}>
+                        <div className="form-group">
+                            <label>Select Course</label>
+                            <select name="course" title="Select Course" value={formData.course} onChange={handleChange}>
+                                <option value="Course 1">Design Fundamentals</option>
+                                <option value="Course 2">Advanced Development</option>
+                                <option value="Course 3">Full Stack Pro</option>
+                            </select>
+                        </div>
+                    </Copy>
+
+                    <Copy delay={1.4}>
+                        <button type="submit" className="submit-btn">
+                            Submit Application
+                        </button>
+                    </Copy>
+                </form>
+
+                <div className="contact-actions">
+                    <Copy delay={1.5}>
+                        <button className="whatsapp-btn" onClick={handleWhatsApp}>
+                            Chat on WhatsApp
+                        </button>
+                    </Copy>
+                </div>
+
+                <div className="contact-details" style={{ marginTop: '3rem', display: 'flex', flexDirection: 'column', gap: '1.5em' }}>
+                    <Copy delay={1.6}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
+                            <p style={{ textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.05em', opacity: 0.6 }}>Phone</p>
+                            <p className="sm" style={{ fontWeight: 400, fontSize: '1.1rem' }}>+91 9207995577</p>
+                        </div>
+                    </Copy>
+                    <Copy delay={1.7}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
+                            <p style={{ textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.05em', opacity: 0.6 }}>Email</p>
+                            <a href="mailto:info@magnatestudyabroad.com" className="sm" style={{ fontWeight: 400, fontSize: '1.1rem', color: 'inherit', textDecoration: 'none' }}>info@magnatestudyabroad.com</a>
+                        </div>
+                    </Copy>
+                    <Copy delay={1.8}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
+                            <p style={{ textTransform: 'uppercase', fontSize: '0.75rem', letterSpacing: '0.05em', opacity: 0.6 }}>Address</p>
+                            <p className="sm" style={{ maxWidth: '300px', lineHeight: '1.4', fontWeight: 400, fontSize: '1.1rem' }}>
+                                Magnate Study Abroad, 1st Floor,<br /> Jairaj Building, Kochi, India - 682024
+                            </p>
+                        </div>
+                    </Copy>
+                </div>
+            </div>
+
+            <div className="contact-footer">
+                <div className="fc-col-lg">
+                    <div className="footer-text">
+                        <div className="footer-text-content">
+                            <p className="sm caps">Developed by Codegrid</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="fc-col-sm">
+                    <div className="footer-text">
+                        <div className="footer-text-content">
+                            <p className="sm caps">&copy; 2025 All Rights Reserved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ContactPage;

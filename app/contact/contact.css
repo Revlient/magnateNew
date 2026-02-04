@@ -1,0 +1,194 @@
+.contact {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    min-height: 100svh;
+    background-color: var(--background);
+    color: var(--foreground);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Map Section (Left) */
+.contact-map-wrapper {
+    flex: 1.5;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    /* Initial visible state, animation handles transitions */
+}
+
+/* Form Section (Right) */
+.contact-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 4rem;
+    height: 100svh;
+    position: relative;
+    z-index: 2;
+    background-color: var(--background);
+}
+
+.contact-header .header-title {
+    font-size: 3rem;
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--foreground-200);
+}
+
+.form-group input,
+.form-group select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--foreground-200);
+    padding: 0.75rem 0;
+    font-size: 1.25rem;
+    color: var(--foreground);
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    border-radius: 0;
+}
+
+.form-group input::placeholder {
+    color: #333;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-bottom-color: var(--btn-icon);
+}
+
+/* Buttons */
+.submit-btn,
+.whatsapp-btn {
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--foreground);
+    background: transparent;
+    color: var(--foreground);
+    margin-top: 1rem;
+    width: fit-content;
+}
+
+.submit-btn:hover {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+.whatsapp-btn {
+    border-color: #25D366;
+    color: #25D366;
+    margin-top: 0;
+}
+
+.whatsapp-btn:hover {
+    background: #25D366;
+    color: #fff;
+}
+
+/* Footer Section */
+.contact-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    padding: 1.5rem;
+    display: flex;
+    gap: 3rem;
+    pointer-events: none;
+    /* Let clicks pass through to map if needed */
+    z-index: 10;
+}
+
+.fc-col-lg {
+    flex: 4;
+}
+
+.fc-col-sm {
+    flex: 2;
+}
+
+.footer-text {
+    overflow: hidden;
+}
+
+.footer-text-content {
+    display: inline-block;
+}
+
+.footer-text p {
+    color: var(--foreground);
+    mix-blend-mode: difference;
+}
+
+@media (max-width: 1000px) {
+    .contact {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .contact-map-wrapper {
+        height: 50vh;
+        width: 100vw;
+        flex: none;
+    }
+
+    .contact-form-container {
+        height: auto;
+        width: 100vw;
+        padding: 3rem 1.5rem 6rem;
+        /* Extra bottom padding for footer */
+        flex: none;
+        gap: 2rem;
+    }
+
+    .contact-header .header-title {
+        font-size: 2rem;
+    }
+
+    .contact-footer {
+        position: relative;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        background: var(--background);
+        pointer-events: auto;
+    }
+}

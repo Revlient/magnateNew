@@ -1,0 +1,89 @@
+.about-section {
+    width: 100vw;
+    padding: 10rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    /* Light beige/off-white from image */
+    color: #1a1a1a;
+    position: relative;
+    z-index: 10;
+}
+
+.about-label {
+    margin-bottom: 4rem;
+}
+
+.about-label p {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: #666;
+    font-family: var(--font-geist-mono);
+    /* Or custom mono */
+    text-transform: uppercase;
+}
+
+.about-quote {
+    max-width: 1000px;
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.about-quote h2 {
+    font-family: var(--font-heading);
+    /* Using project's main serif/custom font */
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #2a2a2a;
+    letter-spacing: -0.02em;
+}
+
+.word-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    padding-bottom: 0.2em;
+    /* Compensate for descenders in overflow hidden */
+    margin-bottom: -0.2em;
+    margin-right: 0.25em;
+}
+
+.word-inner {
+    display: inline-block;
+    will-change: transform;
+}
+
+.about-signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.signature-svg {
+    width: 200px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.signature-svg path {
+    fill: none;
+    stroke: var(--foreground);
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.about-signature-name p {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--foreground);
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-family: var(--font-geist-mono);
+}

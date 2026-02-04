@@ -1,0 +1,91 @@
+.vm-section {
+    position: relative;
+    background-color: #050505;
+    color: white;
+    padding: 10rem 2rem;
+    overflow: hidden;
+}
+
+.vm-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12rem;
+}
+
+.vm-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.vm-label {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: #D4AF37;
+    /* Gold */
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.vm-content {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    /* Fallback */
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.15;
+    font-weight: 500;
+    max-width: 95%;
+}
+
+.vm-sub {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    color: #a1a1aa;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+/* Specific layout adjustments */
+.vm-mission {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.vm-mission .vm-content {
+    margin-left: auto;
+    text-align: right;
+    /* Ensure text aligns right */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .vm-section {
+        padding: 6rem 1.5rem;
+    }
+
+    .vm-container {
+        gap: 6rem;
+    }
+
+    .vm-mission {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .vm-mission .vm-content {
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .vm-content {
+        font-size: 2rem;
+    }
+}

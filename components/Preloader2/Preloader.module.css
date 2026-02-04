@@ -1,0 +1,209 @@
+.container {
+    font-family: var(--font-sans), sans-serif;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    /* Changed from fixed to relative to act as Hero after animation */
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 9999;
+    /* Ensure it stays on top */
+}
+
+/* Common text styles replacing 'p' */
+.text {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    clip-path: polygon(0% 45%, 0% 45%, 0% 55%, 0% 55%);
+    will-change: clip-path;
+}
+
+.progressBar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 25vw;
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--accent-primary);
+}
+
+.videoContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100svh;
+    background-color: var(--bg-dark);
+    clip-path: polygon(20% 20%, 80% 20%, 80% 80%, 20% 80%);
+    will-change: transform, clip-path;
+    overflow: hidden;
+}
+
+.videoContainer video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+}
+
+.nav,
+.footer {
+    width: 100vw;
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    color: var(--foreground);
+    mix-blend-mode: difference;
+    z-index: 2;
+}
+
+.footer {
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 4rem);
+    max-width: 1800px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header h1 {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 7vw;
+    font-family: var(--font-heading), sans-serif;
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: var(--foreground);
+}
+
+.header p {
+    margin-top: 1em;
+    color: var(--accent-primary);
+}
+
+.coordinates {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100vw;
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--accent-primary);
+}
+
+.logo {
+    position: absolute;
+    bottom: 0;
+    padding: 1.5em;
+    left: 50%;
+    display: flex;
+    transform: translateX(-50%);
+    will-change: transform;
+    color: var(--foreground);
+    mix-blend-mode: difference;
+    z-index: 2;
+}
+
+.char {
+    /* Adding generic char class if needed */
+}
+
+/* Use data attribute or specific class for animation targeting to avoid generic class conflicts if possible, 
+   but for now we map CSS classes 1:1 */
+
+.anim-out h1 {
+    position: relative;
+    will-change: transform;
+}
+
+.header h1,
+.header p,
+.coordinates p,
+.char.anim-out {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.header span,
+.coordinates p span {
+    position: relative;
+    display: block;
+    transform: translateY(110%);
+    will-change: transform;
+}
+
+.subText {
+    font-size: 1.2em;
+    text-transform: none;
+    opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+    .header {
+        width: calc(100% - 2rem);
+    }
+
+    .subText {
+        font-size: 3.5vw;
+    }
+
+    .text {
+        font-size: 13px;
+    }
+
+    .progressBar {
+        justify-content: flex-end;
+    }
+
+    .progressBar p:nth-child(1) {
+        display: none;
+    }
+
+    .header h1 {
+        font-size: 10vw;
+        letter-spacing: -0.02em;
+    }
+
+    .coordinates {
+        display: none;
+    }
+}
