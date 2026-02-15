@@ -59,8 +59,7 @@
     display: flex;
 }
 
-.nav-menu-toggle-open,
-.nav-menu-time {
+.nav-menu-toggle-open {
     flex: 1;
 }
 
@@ -163,10 +162,6 @@ img.logo-img {
 }
 
 @media (max-width: 1000px) {
-    .nav-menu-time {
-        display: none;
-    }
-
     .menu-overlay-items {
         flex-direction: column;
         padding: 1rem 1.5rem 1.5rem 1.5rem;

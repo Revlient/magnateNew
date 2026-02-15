@@ -17,7 +17,6 @@ interface MenuProps {
 const Menu = ({ onMenuStateChange }: MenuProps) => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [currentPath, setCurrentPath] = useState("/");
-    const [currentTime, setCurrentTime] = useState("");
     const router = useTransitionRouter();
 
     const menuRef = useRef<HTMLDivElement>(null);
@@ -36,28 +35,6 @@ const Menu = ({ onMenuStateChange }: MenuProps) => {
         if (typeof window !== "undefined") {
             setCurrentPath(window.location.pathname);
         }
-    }, []);
-
-    useEffect(() => {
-        const updateTime = () => {
-            const now = new Date();
-            const timeString = now
-                .toLocaleTimeString("en-US", {
-                    hour12: true,
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                })
-                .replace(/:/g, ":")
-                .toUpperCase();
-            setCurrentTime(timeString);
-        };
-
-        updateTime();
-
-        const interval = setInterval(updateTime, 1000);
-
-        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
@@ -337,11 +314,6 @@ const Menu = ({ onMenuStateChange }: MenuProps) => {
                         </div>
                     </div>
                     <div className="nav-items">
-                        <div className="nav-menu-time">
-                            <div className="revealer">
-                                <p className="sm caps mono">{currentTime}</p>
-                            </div>
-                        </div>
 
                         <div className="nav-menu-toggle-open">
                             <div className="revealer" onClick={openMenu}>

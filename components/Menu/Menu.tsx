@@ -1,6 +1,7 @@
 "use client";
 import "./Menu.css";
 import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 
 import { useTransitionRouter } from "next-view-transitions";
 import gsap from "gsap";
@@ -21,7 +22,6 @@ interface MenuProps {
 const Menu = ({ onMenuStateChange }: MenuProps) => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [currentPath, setCurrentPath] = useState("/");
-    const [currentTime, setCurrentTime] = useState("");
     const router = useTransitionRouter();
 
     const menuRef = useRef<HTMLDivElement>(null);
@@ -40,28 +40,6 @@ const Menu = ({ onMenuStateChange }: MenuProps) => {
         if (typeof window !== "undefined") {
             setCurrentPath(window.location.pathname);
         }
-    }, []);
-
-    useEffect(() => {
-        const updateTime = () => {
-            const now = new Date();
-            const timeString = now
-                .toLocaleTimeString("en-US", {
-                    hour12: true,
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                })
-                .replace(/:/g, ":")
-                .toUpperCase();
-            setCurrentTime(timeString);
-        };
-
-        updateTime();
-
-        const interval = setInterval(updateTime, 1000);
-
-        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
@@ -324,23 +302,51 @@ const Menu = ({ onMenuStateChange }: MenuProps) => {
     return (
         <>
             <div className="nav-container">
-
                 <div className="nav" ref={navRef}>
                     <div className="dummy"></div>
-                    <div className="nav-items">
 
-                        <div className="nav-menu-time">
-                            <div className="revealer">
-                                <p className="sm caps mono">{currentTime}</p>
+                    {/* Desktop Navigation */}
+                    <div className="flex-1 hidden lg:flex justify-end items-center gap-8 pointer-events-auto">
+                         {[
+                            { path: "/", label: "Home" },
+                            { path: "/aboutus", label: "About Us" },
+                            { path: "/studio", label: "Studio" },
+                            { path: "/archive", label: "Archive" },
+                            { path: "/contact", label: "Contact" },
+                        ].map((item) => (
+                            <div className="revealer" key={item.path}>
+                                <a
+                                    href={item.path}
+                                    className="sm caps mono text-white hover:opacity-70 transition-opacity duration-300 relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        navigateTo(item.path);
+                                    }}
+                                >
+                                    {item.label}
+                                </a>
                             </div>
+                        ))}
+                         <div className="revealer ml-4">
+                            <a 
+                                href="/get-free-demo" 
+                                className="sm caps mono text-black bg-zinc-700 px-5 py-2 rounded-full hover:bg-gray-200 transition-colors duration-300 font-semibold"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigateTo("/get-free-demo");
+                                }}
+                            >
+                                Get Free Demo
+                            </a>
                         </div>
+                    </div>
 
-
-
+                    {/* Mobile/Tablet Menu Toggle */}
+                    <div className="flex-1 flex justify-end lg:hidden pointer-events-auto">
                         <div className="nav-menu-toggle-open">
                             <div className="nav-menu-demo">
                                 <div className="revealer">
-                                    <a href="/demo" className="sm caps mono">Get Free Demo</a>
+                                    <a href="/get-free-demo" className="sm caps mono">Get Free Demo</a>
                                 </div>
                             </div>
                             <div className="revealer" onClick={openMenu}>
@@ -350,14 +356,16 @@ const Menu = ({ onMenuStateChange }: MenuProps) => {
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
-            <div className="nav-logo">
+            <div className="nav-logo mix-blend-difference">
                 <div className="revealer">
                     <a
                         href="/"
                         ref={navLogoRef}
+                        className="flex items-center gap-3 no-underline group"
                         onClick={(e) => {
                             e.preventDefault();
                             router.push("/", {
@@ -365,11 +373,18 @@ const Menu = ({ onMenuStateChange }: MenuProps) => {
                             });
                         }}
                     >
-                        <img
-                            className="logo-img"
-                            src="/logo.svg"
-                            alt=""
-                        />
+                         <div className="relative w-10 h-10 md:w-14 md:h-14 transition-transform duration-300 group-hover:scale-105">
+                             <Image
+                                 src="/logo.svg"
+                                 alt="Magnate Logo"
+                                 fill
+                                 className="object-contain"
+                                 priority
+                             />
+                         </div>
+                        <span className="text-xl md:text-2xl font-extrabold tracking-widest text-white uppercase font-[family-name:var(--font-manrope)] leading-none">
+                            Magnate
+                        </span>
                     </a>
                 </div>
             </div>
