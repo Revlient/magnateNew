@@ -25,6 +25,7 @@ import HoverImageLinks from "@/components/HoverImageLinks/HoverImageLinks";
 import ContactModal from "@/components/ContactModal/ContactModal";
 import { Toaster } from "@/components/ui/toaster";
 import CourseDial from "@/components/CourseDial";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 const courseItems = [
   { title: "Diploma in Finance", tags: "Business", src: "/img5.jpg", link: "/courses/finance" },
@@ -117,6 +118,7 @@ export default function Home() {
       {/* <ProcessCards /> */}
       {/* <HoverImageLinks items={[{ label: "Google", img: "/img1.jpg " }, { label: "Netflix", img: "/img2.jpg" }, { label: "Zepto", img: "/img3.jpg" }, { label: "Spotify", img: "/img4.jpg" }]}></HoverImageLinks> */}
       <CourseDial items={courseItems} />
+      <Testimonials /> 
       <Footer />
 
       {/* Modals and Overlays */}
